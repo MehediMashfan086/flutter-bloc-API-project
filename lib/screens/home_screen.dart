@@ -1,4 +1,3 @@
-import 'package:bloc_api_project/screens/bloc_listener_screen.dart';
 import 'package:bloc_api_project/screens/product_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,47 +12,21 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.purple,
       ),
       body: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 40,
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const ProductScreen();
-                    },
-                  ),
-                );
-              },
-              child: const Text(
-                "Get Products",
-                style: TextStyle(fontSize: 22),
+        child: TextButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return const ProductScreen();
+                },
               ),
-            ),
-            const SizedBox(
-              height: 4,
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const BlocListenerScreen();
-                    },
-                  ),
-                );
-              },
-              child: const Text(
-                "Get Bloc Listener",
-                style: TextStyle(fontSize: 22),
-              ),
-            ),
-          ],
+            );
+          },
+          child: const Text(
+            "Get Products",
+            style: TextStyle(fontSize: 22),
+          ),
         ),
       ),
     );
