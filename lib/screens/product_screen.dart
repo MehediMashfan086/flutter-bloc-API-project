@@ -48,7 +48,31 @@ class _ProductScreenState extends State<ProductScreen> {
       //   },
       // ),
 
-      body: BlocListener<ProductsBloc, ProductsState>(
+      // body: BlocListener<ProductsBloc, ProductsState>(
+      //   listener: (context, state) {
+      //     if (state is ProductsLoadedState) {
+      //       VxToast.show(context,
+      //           msg: "Velocity x Products Loaded",
+      //           position: VxToastPosition.top);
+      //       ScaffoldMessenger.of(context)
+      //           .showSnackBar(const SnackBar(content: Text("Data Loaded")));
+      //     } else if (state is ProductsErrorState) {
+      //       VxToast.show(context,
+      //           msg: "Velocity x Products Not Loaded",
+      //           position: VxToastPosition.top);
+      //       ScaffoldMessenger.of(context)
+      //           .showSnackBar(const SnackBar(content: Text("Data Not Loaded")));
+      //     }
+      //   },
+      //   child: const Center(
+      //     child: Text(
+      //       "Bloc Listener",
+      //       style: TextStyle(fontSize: 22),
+      //     ),
+      //   ),
+      // ),
+
+      body: BlocConsumer<ProductsBloc, ProductsState>(
         listener: (context, state) {
           if (state is ProductsLoadedState) {
             VxToast.show(context,
@@ -64,12 +88,27 @@ class _ProductScreenState extends State<ProductScreen> {
                 .showSnackBar(const SnackBar(content: Text("Data Not Loaded")));
           }
         },
-        child: const Center(
-          child: Text(
-            "Bloc Listener",
-            style: TextStyle(fontSize: 22),
-          ),
-        ),
+        builder: (context, state) {
+          if (state is ProductsLoadingState) {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          } else if (state is ProductsLoadedState) {
+            return ListView.builder(
+              itemCount: state.productsModel.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: Text(state.productsModel[index].category.toString()),
+                );
+              },
+            );
+          } else if (state is ProductsErrorState) {
+            return Center(
+              child: Text(state.errorMessage),
+            );
+          }
+          return const SizedBox();
+        },
       ),
     );
   }
