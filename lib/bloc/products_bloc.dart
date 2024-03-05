@@ -12,7 +12,7 @@ class ProductsBloc extends Bloc<ProductsLoadedEvent, ProductsState> {
     on<ProductsLoadedEvent>((event, emit) async {
       try {
         emit(ProductsLoadingState());
-        var data = await productsRepo.geyProducts();
+        var data = await productsRepo.getProducts();
 
         emit(ProductsLoadedState(data));
       } catch (e) {

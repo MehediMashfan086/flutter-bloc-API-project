@@ -94,11 +94,60 @@ class _ProductScreenState extends State<ProductScreen> {
               child: CircularProgressIndicator.adaptive(),
             );
           } else if (state is ProductsLoadedState) {
-            return ListView.builder(
+            return ListView.separated(
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 8,
+              ),
               itemCount: state.productsModel.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  leading: Text(state.productsModel[index].category.toString()),
+                var data = state.productsModel[index];
+                return Card(
+                  child: Column(
+                    children: [
+                      Text(
+                        data.id.toString(),
+                        style:
+                            const TextStyle(fontSize: 16, color: Colors.blue),
+                      ),
+                      Text(
+                        data.title.toString(),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      Text(
+                        data.price.toString(),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      Text(
+                        data.description.toString(),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        data.category.toString(),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        data.image.toString(),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        data.rating!.rate.toString(),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      Text(
+                        data.rating!.count.toString(),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
                 );
               },
             );
