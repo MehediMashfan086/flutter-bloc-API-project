@@ -1,4 +1,5 @@
 import 'package:bloc_api_project/screens/product_screen.dart';
+import 'package:bloc_api_project/screens/users_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,21 +13,42 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.purple,
       ),
       body: Center(
-        child: TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return const ProductScreen();
-                },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const ProductScreen();
+                    },
+                  ),
+                );
+              },
+              child: const Text(
+                "Get Products",
+                style: TextStyle(fontSize: 22),
               ),
-            );
-          },
-          child: const Text(
-            "Get Products",
-            style: TextStyle(fontSize: 22),
-          ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const UsersScreen();
+                    },
+                  ),
+                );
+              },
+              child: const Text(
+                "Get Users",
+                style: TextStyle(fontSize: 22),
+              ),
+            ),
+          ],
         ),
       ),
     );
